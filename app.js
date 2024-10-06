@@ -1,12 +1,12 @@
 // 1) I want to make the user enter the username and then start the game by clicking on a button which stores the username and uses it during the game
 
 // a) Create an event listener for "startGameBtn" that listens for clicks and runs a function called "storeUsername".
-<<<<<<< HEAD
+
 // b) Inside the "storeUsername" function:
 // Take the value from the "usernameInput" field and store it in a variable called "username".
 // If no username is entered, show an alert asking the user to input a name.
 // Display the username in the "messageDisplay" area and call the "startGame" function to begin the game.
-=======
+
 // b) Inside the "storeUsername" function. Take the value from the "usernameInput" field and store it in a variable called "username". If no username is entered, show an alert asking the user to input a name. Display the username in the "messageDisplay" area and call the "startGame" function to begin the game.
 
 // 2) Make a keyboard that contains letters only and stores the guessed letters
@@ -47,4 +47,3 @@
 
 // a) Make the "restartBtn" visible when the player wins or loses the game.
 // b) Add an event listener to the "restartBtn" that will reset the game by calling the "startGame" function again.
->>>>>>> f734cd329c71916a3b9f070181e26bb129c8ee9b
