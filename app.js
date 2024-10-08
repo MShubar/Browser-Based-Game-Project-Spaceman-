@@ -6,7 +6,6 @@ let lossCount = 0
 let currentWord
 // -------------------------------------Constants----------------------------------------//
 const words = ['hi', 'hey']
-
 // ---------------------------------Chashed elements-------------------------------------//
 // 1
 const startGameBtn = document.querySelector('#startgame')
@@ -20,13 +19,13 @@ const keyboard = document.querySelectorAll('.keyboard')
 const winDisplay = document.querySelector('#wincount')
 const lossDisplay = document.querySelector('#losscount')
 // ---------------------------------Functions-------------------------------------------//
-// 1
+// done
 const storeUsername = (event) => {
-  console.log(event.target.id)
-  username = usernameInput.textContent
+  let username = usernameInput.value
   if (username !== '') {
-    user
+    messageDisplay.textContent = username
   } else {
+    alert('Please enter a username')
   }
 }
 //
@@ -39,7 +38,7 @@ const handleGuess = (event) => {
   scoreDisplay()
 }
 //
-// 3
+// done
 const scoreDisplay = () => {
   winDisplay.textContent = winCount
   lossDisplay.textContent = lossCount
@@ -51,13 +50,16 @@ const renderWord = clickedLetters.some((clickedLetter, index) => {})
 // 6
 const winCheck = () => {}
 //
-//
+// done
 const randomWord = () => {
-  currentWord = words[parseInt(Math.random() * 3)]
-  console.log(currentWord)
+  currentWord = words[parseInt(Math.random() * 2)]
+}
+//
+//
+const init = () => {
+  randomWord()
 }
 // -------------------------------Event Listerners-------------------------------------//
-randomWord()
 
 // 1
 startGameBtn.addEventListener('click', storeUsername)

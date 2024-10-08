@@ -41,3 +41,17 @@ body {
   height: 400px;
   width: 400px;
 }
+
+#scoreboard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 50px;
+}
+
+.count {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
