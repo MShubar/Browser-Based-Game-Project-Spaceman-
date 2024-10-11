@@ -3,84 +3,75 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spaceman</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="app.js"></script>
+    <title>Space Hangman</title>
   </head>
   <body>
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="style.css" />
-        <script defer src="app.js"></script>
-        <title>Space Hangman</title>
-      </head>
-      <body>
-        <h1>Space Hangman</h1>
-        <input
-          id="inputusername"
-          type="text"
-          placeholder="Input your username"
-        />
-        <button id="startgame">Start Game</button>
+    <h1>Space Hangman</h1>
+    <input id="inputusername" type="text" placeholder="Input your username" />
+    <button id="startgame">Start Game</button>
 
-        <h1 id="messagedisplay">player1</h1>
-        <section id="scoreboard">
-          <div class="count">
-            <h1>Wins</h1>
-            <h1 id="wincount">0</h1>
-          </div>
-          <div class="count">
-            <h1>Loses</h1>
-            <h1 id="losscount">0</h1>
-          </div>
-        </section>
+    <h1 id="messagedisplay"></h1>
+    <section id="record-board">
+      <h2>Top Scores</h2>
+      <div id="top-scores">
+        <div class="score-item">1. <span id="score1">0</span></div>
+        <div class="score-item">2. <span id="score2">0</span></div>
+        <div class="score-item">3. <span id="score3">0</span></div>
+      </div>
+    </section>
+    <!-- Game Section -->
+    <div id="gameSection" style="display: none">
+      <section id="scoreboard">
+        <div class="count">
+          <h1>Wins</h1>
+          <h1 id="wincount">0</h1>
+        </div>
+        <div class="count">
+          <h1>Loses</h1>
+          <h1 id="losscount">0</h1>
+        </div>
+      </section>
 
-        <section id="anime-display"></section>
+      <section id="word-display"></section>
 
-        <section id="word-display">
-          <div class="square" id="1"></div>
-          <div class="square" id="2"></div>
-          <div class="square" id="3"></div>
-          <div class="square" id="4"></div>
-          <div class="square" id="5"></div>
-        </section>
+      <button class="retrybtn">Retry</button>
 
-        <section id="keyboard">
-          <div class="row" id="first_row">
-            <button class="keyboard" id="Q">Q</button>
-            <button class="keyboard" id="W">W</button>
-            <button class="keyboard" id="E">E</button>
-            <button class="keyboard" id="R">R</button>
-            <button class="keyboard" id="T">T</button>
-            <button class="keyboard" id="Y">Y</button>
-            <button class="keyboard" id="U">U</button>
-            <button class="keyboard" id="I">I</button>
-            <button class="keyboard" id="O">O</button>
-            <button class="keyboard" id="P">P</button>
-          </div>
-          <div class="row" id="second_row">
-            <button class="keyboard" id="A">A</button>
-            <button class="keyboard" id="S">S</button>
-            <button class="keyboard" id="D">D</button>
-            <button class="keyboard" id="F">F</button>
-            <button class="keyboard" id="G">G</button>
-            <button class="keyboard" id="H">H</button>
-            <button class="keyboard" id="J">J</button>
-            <button class="keyboard" id="K">K</button>
-            <button class="keyboard" id="L">L</button>
-          </div>
-          <div class="row" id="third_row">
-            <button class="keyboard" id="Z">Z</button>
-            <button class="keyboard" id="X">X</button>
-            <button class="keyboard" id="C">C</button>
-            <button class="keyboard" id="V">V</button>
-            <button class="keyboard" id="B">B</button>
-            <button class="keyboard" id="N">N</button>
-            <button class="keyboard" id="M">M</button>
-          </div>
-        </section>
-      </body>
-    </html>
+      <section id="keyboard">
+        <div class="row" id="first_row">
+          <button class="keyboard" id="Q">Q</button>
+          <button class="keyboard" id="W">W</button>
+          <button class="keyboard" id="E">E</button>
+          <button class="keyboard" id="R">R</button>
+          <button class="keyboard" id="T">T</button>
+          <button class="keyboard" id="Y">Y</button>
+          <button class="keyboard" id="U">U</button>
+          <button class="keyboard" id="I">I</button>
+          <button class="keyboard" id="O">O</button>
+          <button class="keyboard" id="P">P</button>
+        </div>
+        <div class="row" id="second_row">
+          <button class="keyboard" id="A">A</button>
+          <button class="keyboard" id="S">S</button>
+          <button class="keyboard" id="D">D</button>
+          <button class="keyboard" id="F">F</button>
+          <button class="keyboard" id="G">G</button>
+          <button class="keyboard" id="H">H</button>
+          <button class="keyboard" id="J">J</button>
+          <button class="keyboard" id="K">K</button>
+          <button class="keyboard" id="L">L</button>
+        </div>
+        <div class="row" id="third_row">
+          <button class="keyboard" id="Z">Z</button>
+          <button class="keyboard" id="X">X</button>
+          <button class="keyboard" id="C">C</button>
+          <button class="keyboard" id="V">V</button>
+          <button class="keyboard" id="B">B</button>
+          <button class="keyboard" id="N">N</button>
+          <button class="keyboard" id="M">M</button>
+        </div>
+      </section>
+    </div>
   </body>
 </html>
