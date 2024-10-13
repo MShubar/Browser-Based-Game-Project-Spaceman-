@@ -1,254 +1,184 @@
 // -------------------------------------Variables---------------------------------------//
-let username
+let player1Username, player2Username
+let currentPlayer = 1
 let clickedLetters = []
-let winCount = 0
-let lossCount = 0
-let currentWord
+let winCount1 = 0,
+  winCount2 = 0
+let lossCount1 = 0,
+  lossCount2 = 0
+let currentWord = ''
 let correctLetters = []
 let clickCount = 0
 
 // -------------------------------------Constants----------------------------------------//
-const words = [
-  'ABACUS',
-  'BAGEL',
-  'CACTUS',
-  'DOLPHIN',
-  'EAGLE',
-  'FABLE',
-  'GIRAFFE',
-  'HORIZON',
-  'ICEBERG',
-  'JAGUAR',
-  'KITE',
-  'LEMONADE',
-  'MOUNTAIN',
-  'NEBULA',
-  'OASIS',
-  'PANCAKE',
-  'QUICKSAND',
-  'RAVEN',
-  'SANDWICH',
-  'TIGER',
-  'UMBRELLA',
-  'VIOLET',
-  'WALNUT',
-  'XENOPHOBIA',
-  'YACHT',
-  'ZEBRA',
-  'AQUARIUM',
-  'BICYCLE',
-  'CANDLE',
-  'DREAM',
-  'ELEPHANT',
-  'FROST',
-  'GALAXY',
-  'HELICOPTER',
-  'IGUANA',
-  'JOURNEY',
-  'KANGAROO',
-  'LIBRARY',
-  'MAGNET',
-  'NINJA',
-  'ORCHESTRA',
-  'PUZZLE',
-  'QUEST',
-  'ROCKET',
-  'SILVER',
-  'TELEPHONE',
-  'UNIVERSE',
-  'VOLCANO',
-  'WATERMELON',
-  'XYLOPHONE',
-  'ABOVE',
-  'BALLOON',
-  'CRYSTAL',
-  'DIPLOMA',
-  'ENIGMA',
-  'FANTASY',
-  'GARDEN',
-  'HARMONY',
-  'INVENTION',
-  'JUGGLER',
-  'KITEBOARD',
-  'LANTERN',
-  'MELODY',
-  'NEST',
-  'OCTOPUS',
-  'PIRATE',
-  'QUEEN',
-  'RIVER',
-  'SPECTRUM',
-  'TROPHY',
-  'UNIQUE',
-  'VORTEX',
-  'WIZARD',
-  'YELLOW',
-  'ZOOLOGIST',
-  'AEROPLANE',
-  'BENCH',
-  'CROSSWORD',
-  'DICE',
-  'EMERALD',
-  'FUSION',
-  'GAZELLE',
-  'HARMONICA',
-  'IVORY',
-  'JASMINE',
-  'KUMQUAT',
-  'LEOPARD',
-  'MARSHMALLOW',
-  'NINCOMPOOP',
-  'OYSTER',
-  'PLATYPUS',
-  'QUARTZ',
-  'RUMBA',
-  'SQUASH',
-  'THUNDER',
-  'UNICORN',
-  'VANDAL',
-  'WRESTLER',
-  'XEROPHYTE',
-  'YARN',
-  'ZEPPELIN',
-  'ARTICHOKE',
-  'BLUEPRINT',
-  'CARNIVAL',
-  'DOLPHIN',
-  'ELIXIR',
-  'FRIENDSHIP',
-  'GIRAFFE',
-  'HYDRATION',
-  'INCIDENT'
-]
+const words = ['HI'] // Add more words as needed
 
 // ---------------------------------Cached elements-------------------------------------//
 const startGameBtn = document.querySelector('#startgame')
-const usernameInput = document.querySelector('#inputusername')
+const usernameInputs = document.querySelectorAll('.inputusername')
 const messageDisplay = document.querySelector('#messagedisplay')
 const keyboard = document.querySelectorAll('.keyboard')
-const winDisplay = document.querySelector('#wincount')
-const lossDisplay = document.querySelector('#losscount')
-const retryBtn = document.querySelector('.retrybtn')
+const winDisplay1 = document.querySelector('#wincount1')
+const winDisplay2 = document.querySelector('#wincount2')
+const lossDisplay1 = document.querySelector('#losscount1')
+const lossDisplay2 = document.querySelector('#losscount2')
 const wordDisplay = document.querySelector('#word-display')
+const player1NameDisplay = document.querySelector('#player1name')
+const player2NameDisplay = document.querySelector('#player2name')
+const player1NameLossesDisplay = document.querySelector('#player1nameLosses')
+const player2NameLossesDisplay = document.querySelector('#player2nameLosses')
 
 // ---------------------------------Functions-------------------------------------------//
-const storeUsername = () => {
-  username = usernameInput.value
-  if (username !== '') {
-    messageDisplay.textContent = username
-    document.getElementById('gameSection').style.display = 'block' // Show the game section
+const storeUsernames = () => {
+  player1Username = usernameInputs[0].value
+  player2Username = usernameInputs[1].value
+
+  if (areUsernamesValid()) {
+    displayUsernames()
+    displayMessage(`Welcome, ${player1Username} and ${player2Username}!`)
+    hideUsernameInputs()
+    startGame()
   } else {
-    alert('Please enter a username')
+    displayMessage('Please enter both usernames!')
   }
 }
 
-const clickingLetter = (event) => {
-  let clickedLetter = event.target.id
-  clickedLetters.push(clickedLetter)
-  event.target.setAttribute('disabled', '')
+const areUsernamesValid = () => player1Username && player2Username
 
-  // Update correct letters if the clicked letter is in the current word
-  if (currentWord.includes(clickedLetter)) {
-    correctLetters.push(clickedLetter)
-  }
-
-  console.log(clickedLetters)
-  console.log(currentWord)
-  console.log(`Correct Letters: ${correctLetters}`)
+const displayUsernames = () => {
+  player1NameDisplay.innerText = player1Username
+  player2NameDisplay.innerText = player2Username
+  player1NameLossesDisplay.innerText = player1Username
+  player2NameLossesDisplay.innerText = player2Username
 }
 
-const scoreDisplay = () => {
-  winDisplay.textContent = winCount
-  lossDisplay.textContent = lossCount
+const hideUsernameInputs = () => {
+  usernameInputs.forEach((input) => (input.style.display = 'none'))
+  startGameBtn.style.display = 'none'
 }
 
-const renderWord = () => {
-  wordDisplay.innerHTML = '' // Clear the previous word display
-  currentWord.split('').forEach((letter) => {
-    const square = document.createElement('div')
-    square.classList.add('letter-square') // Add a class for styling
-
-    // Show the letter if guessed correctly or leave empty
-    square.textContent = correctLetters.includes(letter) ? letter : ''
-    wordDisplay.appendChild(square)
-  })
+const startGame = () => {
+  resetGameVariables()
+  selectRandomWord()
+  displayWord()
+  displayTurnMessage()
+  document.getElementById('gameSection').style.display = 'block'
 }
 
-const winCheck = () => {
-  const checkWin = currentWord
-    .split('')
-    .every((letter) => correctLetters.includes(letter))
-  console.log(checkWin)
-  if (checkWin) {
-    console.log(`you won`)
-    winCount += 1
-    keyboard.forEach((letter) => {
-      letter.setAttribute('disabled', '')
-    })
-  }
-}
-
-const lossCheck = () => {
-  if (clickCount === 10) {
-    console.log(`you lose`)
-    lossCount += 1
-    keyboard.forEach((letter) => {
-      letter.setAttribute('disabled', '')
-    })
-  }
-}
-
-const randomWord = () => {
-  const randomIndex = Math.floor(Math.random() * words.length) // Generate a random index
-  currentWord = words[randomIndex].toUpperCase() // Select the word at that index and convert to uppercase
-  console.log(`Current Word: ${currentWord}`) // Debugging log to check the current word
-}
-
-const splitWord = () => {
-  currentWord = currentWord.split('') // Split the word into an array of letters
-  console.log(currentWord)
-}
-
-const retryGame = () => {
-  keyboard.forEach((letter) => {
-    letter.removeAttribute('disabled')
-  })
+const resetGameVariables = () => {
   clickedLetters = []
   correctLetters = []
   clickCount = 0
-  init() // Reinitialize the game
 }
 
-const displaySquares = () => {
-  wordDisplay.innerHTML = '' // Clear existing squares
-  const squaresCount = currentWord.length
-  for (let i = 0; i < squaresCount; i++) {
-    const squareDiv = document.createElement('div')
-    squareDiv.classList.add('square')
-    wordDisplay.appendChild(squareDiv) // Create squares for the letters of the word
+const selectRandomWord = () => {
+  currentWord = words[Math.floor(Math.random() * words.length)]
+  correctLetters = Array(currentWord.length).fill('_') // Fill with underscores
+}
+
+const displayWord = () => {
+  wordDisplay.innerHTML = correctLetters
+    .map((letter) => `<div class="letter-square">${letter}</div>`)
+    .join('')
+}
+
+const displayTurnMessage = () => {
+  displayMessage(
+    `It's ${currentPlayer === 1 ? player1Username : player2Username}'s turn!`
+  )
+}
+
+const displayMessage = (message) => {
+  messageDisplay.innerText = message
+}
+
+const handleGuess = (letter, button) => {
+  if (!clickedLetters.includes(letter)) {
+    clickedLetters.push(letter)
+    button.disabled = true // Disable the button after it is clicked
+    if (currentWord.includes(letter)) {
+      updateCorrectLetters(letter)
+    } else {
+      clickCount++ // Increment click count on incorrect guess
+    }
+    checkForWin()
+    checkForLoss()
   }
 }
 
-const init = () => {
-  randomWord()
-  splitWord()
-  displaySquares() // Create squares once during initialization
+const updateCorrectLetters = (letter) => {
+  currentWord.split('').forEach((char, index) => {
+    if (char === letter) {
+      correctLetters[index] = letter // Reveal the letter
+    }
+  })
+  displayWord()
 }
 
-const handleGuess = (event) => {
-  clickingLetter(event)
-  renderWord() // Update the squares based on correct letters
-  winCheck()
-  lossCheck()
-  scoreDisplay()
+const checkForWin = () => {
+  if (!correctLetters.includes('_')) {
+    if (currentPlayer === 1) {
+      winCount1++
+      winDisplay1.innerText = winCount1
+    } else {
+      winCount2++
+      winDisplay2.innerText = winCount2
+    }
+    displayMessage(`Player ${currentPlayer} wins! The word was: ${currentWord}`)
+    endGame()
+  }
 }
 
-// Initialize the game
-init()
+const checkForLoss = () => {
+  if (clickCount >= 10) {
+    if (currentPlayer === 1) {
+      lossCount1++
+      lossDisplay1.innerText = lossCount1
+    } else {
+      lossCount2++
+      lossDisplay2.innerText = lossCount2
+    }
+    displayMessage(
+      `Player ${currentPlayer} loses! The word was: ${currentWord}`
+    )
+    endGame()
+  }
+}
 
-// -------------------------------Event listeners-------------------------------------//
-startGameBtn.addEventListener('click', storeUsername)
-keyboard.forEach((letter) => {
-  letter.addEventListener('click', handleGuess)
+const endGame = () => {
+  disableKeyboard()
+  resetGameForNextRound()
+  switchTurn()
+}
+
+const resetGameForNextRound = () => {
+  // Clear previous letters
+  clickedLetters = [] // Clear clicked letters
+  clickCount = 0 // Reset click count
+  selectRandomWord() // Select a new word
+  displayWord() // Display the new word
+}
+
+const switchTurn = () => {
+  currentPlayer = currentPlayer === 1 ? 2 : 1 // Switch to the next player
+  displayTurnMessage()
+  enableKeyboard()
+}
+
+const disableKeyboard = () => {
+  keyboard.forEach((button) => {
+    button.disabled = true
+  })
+}
+
+const enableKeyboard = () => {
+  keyboard.forEach((button) => {
+    button.disabled = false // Reset all buttons to enabled
+  })
+}
+
+// ---------------------------------Event Listeners-------------------------------------//
+startGameBtn.addEventListener('click', storeUsernames)
+keyboard.forEach((button) => {
+  button.addEventListener('click', () => handleGuess(button.id, button))
 })
-retryBtn.addEventListener('click', retryGame)
