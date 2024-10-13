@@ -5,6 +5,10 @@ body {
   text-align: center;
   margin: 0;
   padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 input {
@@ -23,7 +27,7 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  box-shadow: 0 0 10px #39ff14, 0 0 40px #39ff14;
+  box-shadow: 0px 0px 10px #39ff14, 0px 0px 40px #39ff14;
 }
 
 button:disabled {
@@ -43,7 +47,7 @@ button:disabled {
 #word-display {
   display: flex;
   justify-content: center;
-  margin: 20px 0;
+  margin: 20px 0px;
 }
 
 .letter-square {
@@ -61,7 +65,7 @@ button:disabled {
 }
 
 .score {
-  font-size: 1.5em;
+  font-size: 24px;
   margin: 10px;
 }
 
@@ -79,7 +83,7 @@ button:disabled {
 
 .score-item {
   color: #ecf0f1;
-  font-size: 1.2em;
+  font-size: 19.2px;
 }
 
 h1,
@@ -92,4 +96,10 @@ h2 {
   justify-content: center;
   align-items: center;
   margin: 20px;
+}
+
+#animation {
+  width: 400px;
+  height: 300px;
+  border: #121212 10px solid;
 }

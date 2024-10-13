@@ -9,9 +9,9 @@ let lossCount1 = 0,
 let currentWord = ''
 let correctLetters = []
 let clickCount = 0
-
+let tries = 10
 // -------------------------------------Constants----------------------------------------//
-const words = ['HI'] // Add more words as needed
+const words = ['HI', 'HELLO']
 
 // ---------------------------------Cached elements-------------------------------------//
 const startGameBtn = document.querySelector('#startgame')
@@ -27,6 +27,7 @@ const player1NameDisplay = document.querySelector('#player1name')
 const player2NameDisplay = document.querySelector('#player2name')
 const player1NameLossesDisplay = document.querySelector('#player1nameLosses')
 const player2NameLossesDisplay = document.querySelector('#player2nameLosses')
+const triesLeft = document.querySelector('#Tries_left')
 
 // ---------------------------------Functions-------------------------------------------//
 const storeUsernames = () => {
@@ -73,7 +74,7 @@ const resetGameVariables = () => {
 
 const selectRandomWord = () => {
   currentWord = words[Math.floor(Math.random() * words.length)]
-  correctLetters = Array(currentWord.length).fill('_') // Fill with underscores
+  correctLetters = Array(currentWord.length).fill('_') //
 }
 
 const displayWord = () => {
@@ -95,11 +96,12 @@ const displayMessage = (message) => {
 const handleGuess = (letter, button) => {
   if (!clickedLetters.includes(letter)) {
     clickedLetters.push(letter)
-    button.disabled = true // Disable the button after it is clicked
+    button.disabled = true
     if (currentWord.includes(letter)) {
       updateCorrectLetters(letter)
     } else {
-      clickCount++ // Increment click count on incorrect guess
+      clickCount++
+      triesCount()
     }
     checkForWin()
     checkForLoss()
@@ -109,7 +111,7 @@ const handleGuess = (letter, button) => {
 const updateCorrectLetters = (letter) => {
   currentWord.split('').forEach((char, index) => {
     if (char === letter) {
-      correctLetters[index] = letter // Reveal the letter
+      correctLetters[index] = letter
     }
   })
   displayWord()
@@ -152,15 +154,14 @@ const endGame = () => {
 }
 
 const resetGameForNextRound = () => {
-  // Clear previous letters
-  clickedLetters = [] // Clear clicked letters
-  clickCount = 0 // Reset click count
-  selectRandomWord() // Select a new word
-  displayWord() // Display the new word
+  clickedLetters = []
+  clickCount = 0
+  selectRandomWord()
+  displayWord()
 }
 
 const switchTurn = () => {
-  currentPlayer = currentPlayer === 1 ? 2 : 1 // Switch to the next player
+  currentPlayer = currentPlayer === 1 ? 2 : 1
   displayTurnMessage()
   enableKeyboard()
 }
@@ -173,10 +174,14 @@ const disableKeyboard = () => {
 
 const enableKeyboard = () => {
   keyboard.forEach((button) => {
-    button.disabled = false // Reset all buttons to enabled
+    button.disabled = false
   })
 }
 
+const triesCount = () => {
+  tries -= 1
+  triesLeft.textContent = `Tries left: ${tries}`
+}
 // ---------------------------------Event Listeners-------------------------------------//
 startGameBtn.addEventListener('click', storeUsernames)
 keyboard.forEach((button) => {
