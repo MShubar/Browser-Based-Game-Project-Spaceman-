@@ -6,157 +6,157 @@ let winCount1 = 0,
   winCount2 = 0
 let lossCount1 = 0,
   lossCount2 = 0
-let currentWord = ""
+let currentWord = ''
 let correctLetters = []
 let clickCount = 0
 let tries = 10
 // -------------------------------------Constants----------------------------------------//
 const words = [
-  "PIZZA",
-  "BURGER",
-  "PASTA",
-  "SUSHI",
-  "TACOS",
-  "SALAD",
-  "STEAK",
-  "FRIES",
-  "SOUP",
-  "SANDWICH",
-  "DUMPLINGS",
-  "CURRY",
-  "NOODLES",
-  "PANCAKES",
-  "WAFFLES",
-  "ICE CREAM",
-  "LASAGNA",
-  "BURRITO",
-  "PAELLA",
-  "SHAWARMA",
-  "CAR",
-  "BICYCLE",
-  "BUS",
-  "TRAIN",
-  "MOTORCYCLE",
-  "AIRPLANE",
-  "BOAT",
-  "SUBWAY",
-  "TRAM",
-  "HELICOPTER",
-  "SCOOTER",
-  "FERRY",
-  "TAXI",
-  "SKATEBOARD",
-  "VAN",
-  "TRUCK",
-  "HOVERCRAFT",
-  "HOT AIR BALLOON",
-  "SEGWAY",
-  "MONORAIL",
-  "T-SHIRT",
-  "JEANS",
-  "JACKET",
-  "SWEATER",
-  "SKIRT",
-  "DRESS",
-  "BLOUSE",
-  "SHORTS",
-  "SUIT",
-  "HOODIE",
-  "COAT",
-  "PAJAMAS",
-  "TANK TOP",
-  "SNEAKERS",
-  "SANDALS",
-  "SCARF",
-  "HAT",
-  "SOCKS",
-  "GLOVES",
-  "BELT",
+  'PIZZA',
+  'BURGER',
+  'PASTA',
+  'SUSHI',
+  'TACOS',
+  'SALAD',
+  'STEAK',
+  'FRIES',
+  'SOUP',
+  'SANDWICH',
+  'DUMPLINGS',
+  'CURRY',
+  'NOODLES',
+  'PANCAKES',
+  'WAFFLES',
+  'ICE CREAM',
+  'LASAGNA',
+  'BURRITO',
+  'PAELLA',
+  'SHAWARMA',
+  'CAR',
+  'BICYCLE',
+  'BUS',
+  'TRAIN',
+  'MOTORCYCLE',
+  'AIRPLANE',
+  'BOAT',
+  'SUBWAY',
+  'TRAM',
+  'HELICOPTER',
+  'SCOOTER',
+  'FERRY',
+  'TAXI',
+  'SKATEBOARD',
+  'VAN',
+  'TRUCK',
+  'HOVERCRAFT',
+  'HOT AIR BALLOON',
+  'SEGWAY',
+  'MONORAIL',
+  'T-SHIRT',
+  'JEANS',
+  'JACKET',
+  'SWEATER',
+  'SKIRT',
+  'DRESS',
+  'BLOUSE',
+  'SHORTS',
+  'SUIT',
+  'HOODIE',
+  'COAT',
+  'PAJAMAS',
+  'TANK TOP',
+  'SNEAKERS',
+  'SANDALS',
+  'SCARF',
+  'HAT',
+  'SOCKS',
+  'GLOVES',
+  'BELT'
 ]
 const categories = {
   Food: [
-    "PIZZA",
-    "BURGER",
-    "PASTA",
-    "SUSHI",
-    "TACOS",
-    "SALAD",
-    "STEAK",
-    "FRIES",
-    "SOUP",
-    "SANDWICH",
-    "DUMPLINGS",
-    "CURRY",
-    "NOODLES",
-    "PANCAKES",
-    "WAFFLES",
-    "ICE CREAM",
-    "LASAGNA",
-    "BURRITO",
-    "PAELLA",
-    "SHAWARMA",
+    'PIZZA',
+    'BURGER',
+    'PASTA',
+    'SUSHI',
+    'TACOS',
+    'SALAD',
+    'STEAK',
+    'FRIES',
+    'SOUP',
+    'SANDWICH',
+    'DUMPLINGS',
+    'CURRY',
+    'NOODLES',
+    'PANCAKES',
+    'WAFFLES',
+    'ICE CREAM',
+    'LASAGNA',
+    'BURRITO',
+    'PAELLA',
+    'SHAWARMA'
   ],
   Transportation: [
-    "CAR",
-    "BICYCLE",
-    "BUS",
-    "TRAIN",
-    "MOTORCYCLE",
-    "AIRPLANE",
-    "BOAT",
-    "SUBWAY",
-    "TRAM",
-    "HELICOPTER",
-    "SCOOTER",
-    "FERRY",
-    "TAXI",
-    "SKATEBOARD",
-    "VAN",
-    "TRUCK",
-    "HOVERCRAFT",
-    "HOT AIR BALLOON",
-    "SEGWAY",
-    "MONORAIL",
+    'CAR',
+    'BICYCLE',
+    'BUS',
+    'TRAIN',
+    'MOTORCYCLE',
+    'AIRPLANE',
+    'BOAT',
+    'SUBWAY',
+    'TRAM',
+    'HELICOPTER',
+    'SCOOTER',
+    'FERRY',
+    'TAXI',
+    'SKATEBOARD',
+    'VAN',
+    'TRUCK',
+    'HOVERCRAFT',
+    'HOT AIR BALLOON',
+    'SEGWAY',
+    'MONORAIL'
   ],
   Clothing: [
-    "T-SHIRT",
-    "JEANS",
-    "JACKET",
-    "SWEATER",
-    "SKIRT",
-    "DRESS",
-    "BLOUSE",
-    "SHORTS",
-    "SUIT",
-    "HOODIE",
-    "COAT",
-    "PAJAMAS",
-    "TANK TOP",
-    "SNEAKERS",
-    "SANDALS",
-    "SCARF",
-    "HAT",
-    "SOCKS",
-    "GLOVES",
-    "BELT",
-  ],
+    'T-SHIRT',
+    'JEANS',
+    'JACKET',
+    'SWEATER',
+    'SKIRT',
+    'DRESS',
+    'BLOUSE',
+    'SHORTS',
+    'SUIT',
+    'HOODIE',
+    'COAT',
+    'PAJAMAS',
+    'TANK TOP',
+    'SNEAKERS',
+    'SANDALS',
+    'SCARF',
+    'HAT',
+    'SOCKS',
+    'GLOVES',
+    'BELT'
+  ]
 }
 
 // ---------------------------------Cached elements-------------------------------------//
-const startGameBtn = document.querySelector("#startgame")
-const usernameInputs = document.querySelectorAll(".inputusername")
-const messageDisplay = document.querySelector("#messagedisplay")
-const keyboard = document.querySelectorAll(".keyboard")
-const winDisplay1 = document.querySelector("#wincount1")
-const winDisplay2 = document.querySelector("#wincount2")
-const lossDisplay1 = document.querySelector("#losscount1")
-const lossDisplay2 = document.querySelector("#losscount2")
-const wordDisplay = document.querySelector("#word-display")
-const player1NameDisplay = document.querySelector("#player1name")
-const player2NameDisplay = document.querySelector("#player2name")
-const player1NameLossesDisplay = document.querySelector("#player1nameLosses")
-const player2NameLossesDisplay = document.querySelector("#player2nameLosses")
-const triesLeft = document.querySelector("#Tries_left")
+const startGameBtn = document.querySelector('#startgame')
+const usernameInputs = document.querySelectorAll('.inputusername')
+const messageDisplay = document.querySelector('#messagedisplay')
+const keyboard = document.querySelectorAll('.keyboard')
+const winDisplay1 = document.querySelector('#wincount1')
+const winDisplay2 = document.querySelector('#wincount2')
+const lossDisplay1 = document.querySelector('#losscount1')
+const lossDisplay2 = document.querySelector('#losscount2')
+const wordDisplay = document.querySelector('#word-display')
+const player1NameDisplay = document.querySelector('#player1name')
+const player2NameDisplay = document.querySelector('#player2name')
+const player1NameLossesDisplay = document.querySelector('#player1nameLosses')
+const player2NameLossesDisplay = document.querySelector('#player2nameLosses')
+const triesLeft = document.querySelector('#Tries_left')
 
 // ---------------------------------Functions-------------------------------------------//
 const storeUsernames = () => {
@@ -169,7 +169,7 @@ const storeUsernames = () => {
     hideUsernameInputs()
     startGame()
   } else {
-    displayMessage("Please enter both usernames!")
+    displayMessage('Please enter both usernames!')
   }
 }
 
@@ -183,8 +183,8 @@ const displayUsernames = () => {
 }
 
 const hideUsernameInputs = () => {
-  usernameInputs.forEach((input) => (input.style.display = "none"))
-  startGameBtn.style.display = "none"
+  usernameInputs.forEach((input) => (input.style.display = 'none'))
+  startGameBtn.style.display = 'none'
 }
 
 const startGame = () => {
@@ -192,7 +192,7 @@ const startGame = () => {
   selectRandomWord()
   displayWord()
   displayTurnMessage()
-  document.getElementById("gameSection").style.display = "block"
+  document.getElementById('gameSection').style.display = 'block'
 }
 
 const resetGameVariables = () => {
@@ -208,20 +208,20 @@ const selectRandomWord = () => {
   const wordsInCategory = categories[randomCategory]
   currentWord =
     wordsInCategory[Math.floor(Math.random() * wordsInCategory.length)]
-  correctLetters = Array(currentWord.length).fill("_")
+  correctLetters = Array(currentWord.length).fill('_')
 
   displayCategory(randomCategory)
 }
 
 const displayCategory = (category) => {
-  const categoryDisplay = document.getElementById("category-display")
+  const categoryDisplay = document.getElementById('category-display')
   categoryDisplay.innerText = `Category: ${category}`
 }
 
 const displayWord = () => {
   wordDisplay.innerHTML = correctLetters
     .map((letter) => `<div class="letter-square">${letter}</div>`)
-    .join("")
+    .join('')
 }
 
 const displayTurnMessage = () => {
@@ -250,7 +250,7 @@ const handleGuess = (letter, button) => {
 }
 
 const updateCorrectLetters = (letter) => {
-  currentWord.split("").forEach((char, index) => {
+  currentWord.split('').forEach((char, index) => {
     if (char === letter) {
       correctLetters[index] = letter
     }
@@ -259,7 +259,7 @@ const updateCorrectLetters = (letter) => {
 }
 
 const checkForWin = () => {
-  if (!correctLetters.includes("_")) {
+  if (!correctLetters.includes('_')) {
     if (currentPlayer === 1) {
       winCount1++
       winDisplay1.innerText = winCount1
@@ -331,7 +331,7 @@ const triesCount = () => {
 }
 
 function updateAnimation() {
-  const animationDiv = document.getElementById("animation")
+  const animationDiv = document.getElementById('animation')
   const imgPath = `images/chance${tries}.png` // Use the tries variable here
   animationDiv.style.backgroundImage = `url(${imgPath})`
 
@@ -346,7 +346,7 @@ function reduceTries() {
   }
 }
 // ---------------------------------Event Listeners-------------------------------------//
-startGameBtn.addEventListener("click", storeUsernames)
+startGameBtn.addEventListener('click', storeUsernames)
 keyboard.forEach((button) => {
-  button.addEventListener("click", () => handleGuess(button.id, button))
+  button.addEventListener('click', () => handleGuess(button.id, button))
 })
