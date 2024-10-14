@@ -192,6 +192,7 @@ const hideUsernameInputs = () => {
 const startGame = () => {
   resetGameVariables()
   selectRandomWord()
+  previousWord = currentWord
   displayWord()
   displayTurnMessage()
   document.getElementById('gameSection').style.display = 'block'
@@ -310,16 +311,16 @@ const switchTurn = () => {
   currentPlayer = currentPlayer === 1 ? 2 : 1
   tries = 10
   displayTurnMessage()
-  previousWord = currentWord
+
   displayMessage(
     `The word was ${previousWord} It's ${
       currentPlayer === 1 ? player1Username : player2Username
     }'s turn!`
   )
+  previousWord = currentWord
   enableKeyboard()
   triesLeft.textContent = `Tries left: ${tries}`
   updateAnimation()
-  console.log(previousWord)
 }
 
 const disableKeyboard = () => {
@@ -337,16 +338,13 @@ const enableKeyboard = () => {
 const triesCount = () => {
   tries -= 1
   triesLeft.textContent = `Tries left: ${tries}`
-  updateAnimation() // Update the animation after tries are reduced
+  updateAnimation()
 }
 
 const updateAnimation = () => {
   const animationDiv = document.getElementById('animation')
-  const imgPath = `images/chance${tries}.png` // Use the tries variable here
+  const imgPath = `images/chance${tries}.png`
   animationDiv.style.backgroundImage = `url(${imgPath})`
-
-  // Log for debugging
-  console.log(`Background image set to: ${imgPath}`)
 }
 
 const reduceTries = () => {
@@ -355,8 +353,32 @@ const reduceTries = () => {
     updateAnimation()
   }
 }
+const key = (event) => {
+  if (event.key === 'Enter') {
+    storeUsernames()
+  } else {
+  }
+}
+const anyKey = (event) => {}
 // ---------------------------------Event Listeners-------------------------------------//
 startGameBtn.addEventListener('click', storeUsernames)
 keyboard.forEach((button) => {
   button.addEventListener('click', () => handleGuess(button.id, button))
+})
+
+document.addEventListener('keypress', key)
+document.addEventListener('keypress', (event) => {
+  if (event.key === 'Enter') {
+    storeUsernames()
+  } else {
+    const letter = event.key.toUpperCase()
+    if (currentWord !== '') {
+      if (letter >= 'A' && letter <= 'Z') {
+        const button = Array.from(keyboard).find((btn) => btn.id === letter)
+        if (button && !button.disabled) {
+          handleGuess(letter, button)
+        }
+      }
+    }
+  }
 })
