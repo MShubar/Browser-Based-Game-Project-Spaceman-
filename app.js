@@ -305,8 +305,11 @@ const resetGameForNextRound = () => {
 
 const switchTurn = () => {
   currentPlayer = currentPlayer === 1 ? 2 : 1
+  tries = 10
   displayTurnMessage()
   enableKeyboard()
+  triesLeft.textContent = `Tries left: ${tries}`
+  updateAnimation()
 }
 
 const disableKeyboard = () => {
@@ -324,6 +327,23 @@ const enableKeyboard = () => {
 const triesCount = () => {
   tries -= 1
   triesLeft.textContent = `Tries left: ${tries}`
+  updateAnimation() // Update the animation after tries are reduced
+}
+
+function updateAnimation() {
+  const animationDiv = document.getElementById("animation")
+  const imgPath = `images/chance${tries}.png` // Use the tries variable here
+  animationDiv.style.backgroundImage = `url(${imgPath})`
+
+  // Log for debugging
+  console.log(`Background image set to: ${imgPath}`)
+}
+
+function reduceTries() {
+  if (triesLeft > 1) {
+    triesLeft--
+    updateAnimation()
+  }
 }
 // ---------------------------------Event Listeners-------------------------------------//
 startGameBtn.addEventListener("click", storeUsernames)

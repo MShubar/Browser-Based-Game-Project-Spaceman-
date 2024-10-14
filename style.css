@@ -103,7 +103,10 @@ h2 {
   width: 300px;
   height: 200px;
   border: #121212 10px solid;
-  margin: 0 auto; /* Center it horizontally */
+  background-size: cover;
+  background-position: center;
+  margin: 0 auto;
+  background-image: url("images/chance10.png");
 }
 
 #gameSection {
