@@ -80,6 +80,7 @@ button:disabled {
   background-color: rgba(44, 62, 80, 0.8);
   padding: 15px;
   border-radius: 5px;
+  display: none;
 }
 
 .score-item {

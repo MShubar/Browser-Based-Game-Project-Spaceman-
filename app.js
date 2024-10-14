@@ -157,6 +157,7 @@ const player2NameDisplay = document.querySelector('#player2name')
 const player1NameLossesDisplay = document.querySelector('#player1nameLosses')
 const player2NameLossesDisplay = document.querySelector('#player2nameLosses')
 const triesLeft = document.querySelector('#Tries_left')
+const scoreContainer = document.querySelector('#scores-container')
 
 // ---------------------------------Functions-------------------------------------------//
 const storeUsernames = () => {
@@ -193,6 +194,7 @@ const startGame = () => {
   displayWord()
   displayTurnMessage()
   document.getElementById('gameSection').style.display = 'block'
+  scoreContainer.style.display = 'flex'
 }
 
 const resetGameVariables = () => {
