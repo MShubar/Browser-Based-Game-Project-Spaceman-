@@ -10,6 +10,7 @@ let currentWord = ''
 let correctLetters = []
 let clickCount = 0
 let tries = 10
+let previousWord = ''
 // -------------------------------------Constants----------------------------------------//
 const words = [
   'PIZZA',
@@ -309,9 +310,16 @@ const switchTurn = () => {
   currentPlayer = currentPlayer === 1 ? 2 : 1
   tries = 10
   displayTurnMessage()
+  previousWord = currentWord
+  displayMessage(
+    `The word was ${previousWord} It's ${
+      currentPlayer === 1 ? player1Username : player2Username
+    }'s turn!`
+  )
   enableKeyboard()
   triesLeft.textContent = `Tries left: ${tries}`
   updateAnimation()
+  console.log(previousWord)
 }
 
 const disableKeyboard = () => {
@@ -332,7 +340,7 @@ const triesCount = () => {
   updateAnimation() // Update the animation after tries are reduced
 }
 
-function updateAnimation() {
+const updateAnimation = () => {
   const animationDiv = document.getElementById('animation')
   const imgPath = `images/chance${tries}.png` // Use the tries variable here
   animationDiv.style.backgroundImage = `url(${imgPath})`
@@ -341,7 +349,7 @@ function updateAnimation() {
   console.log(`Background image set to: ${imgPath}`)
 }
 
-function reduceTries() {
+const reduceTries = () => {
   if (triesLeft > 1) {
     triesLeft--
     updateAnimation()

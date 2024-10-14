@@ -10,7 +10,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  height: 101vh;
 }
 
 input {
@@ -126,8 +126,11 @@ h2 {
     padding: 15px;
     margin: 4px;
   }
+  body {
+    height: 101vh;
+    width: 101vw;
+  }
   #scores-container {
-    display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
