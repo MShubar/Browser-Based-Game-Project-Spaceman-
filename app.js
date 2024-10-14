@@ -272,7 +272,7 @@ const checkForWin = () => {
       winDisplay2.innerText = winCount2
     }
     tries = 10
-    displayMessage(`Player ${currentPlayer} wins! The word was: ${currentWord}`)
+
     endGame()
   }
 }
@@ -287,9 +287,6 @@ const checkForLoss = () => {
       lossDisplay2.innerText = lossCount2
     }
     tries = 10
-    displayMessage(
-      `Player ${currentPlayer} loses! The word was: ${currentWord}`
-    )
     endGame()
   }
 }
