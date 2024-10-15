@@ -12,8 +12,10 @@
     <title>👽Space Hangman👽</title>
   </head>
   <body>
+    <!-- Game title -->
     <h1>👽Space Hangman👽</h1>
 
+    <!-- Input player usernames -->
     <input
       class="inputusername"
       type="text"
@@ -24,14 +26,20 @@
       type="text"
       placeholder="Player 2: Input your username"
     />
+
+    <!-- Button to start the game -->
     <button id="startgame">Start Game</button>
 
+    <!-- Display game messages -->
     <h1 id="messagedisplay"></h1>
 
+    <!-- Scoreboard container -->
     <div id="scores-container">
+      <!-- Section to display players scores -->
       <section id="record-board">
         <h2>Top Scores</h2>
         <div id="top-scores">
+          <!-- Player 1's saved and not saved -->
           <div class="score-item">
             <span id="player1name"></span> Saved: <span id="wincount1">0</span>
           </div>
@@ -39,10 +47,11 @@
             <span id="player1nameLosses"></span> Not saved:
             <span id="losscount1">0</span>
           </div>
+
+          <!-- Player 2 saved and not saved -->
           <div class="score-item">
             <span id="player2name"></span> Saved: <span id="wincount2">0</span>
           </div>
-
           <div class="score-item">
             <span id="player2nameLosses"></span> Not saved:
             <span id="losscount2">0</span>
@@ -51,14 +60,26 @@
       </section>
     </div>
 
+    <!-- Hidden game section that will be displayed once the game starts -->
     <div id="gameSection" style="display: none">
+      <!-- Area for alien animation -->
       <div id="animation"></div>
+
+      <!-- Display remaining tries -->
       <div id="Tries_left">Tries left: 10</div>
+
+      <!-- Section for the game (word and keyboard) -->
       <section id="scoreboard">
+        <!-- Category of the word -->
         <h2 id="category-display"></h2>
+
+        <!-- Display the current word -->
         <h1>Current Word</h1>
         <section id="word-display"></section>
+
+        <!-- Virtual keyboard for guessing letters -->
         <section id="keyboard">
+          <!-- First row of keyboard letters -->
           <div class="row" id="first_row">
             <button class="keyboard" id="Q">Q</button>
             <button class="keyboard" id="W">W</button>
@@ -71,6 +92,8 @@
             <button class="keyboard" id="O">O</button>
             <button class="keyboard" id="P">P</button>
           </div>
+
+          <!-- Second row of keyboard letters -->
           <div class="row" id="second_row">
             <button class="keyboard" id="A">A</button>
             <button class="keyboard" id="S">S</button>
@@ -82,6 +105,8 @@
             <button class="keyboard" id="K">K</button>
             <button class="keyboard" id="L">L</button>
           </div>
+
+          <!-- Third row of keyboard letters -->
           <div class="row" id="third_row">
             <button class="keyboard" id="Z">Z</button>
             <button class="keyboard" id="X">X</button>

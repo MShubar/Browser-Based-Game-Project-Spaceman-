@@ -1,6 +1,6 @@
 body {
-  font-family: 'Orbitron', sans-serif;
-  background-image: url(image.png);
+  font-family: "Orbitron", sans-serif;
+  background-image: url(./images/image.png);
   background-repeat: no-repeat;
   background-size: cover;
   color: #39ff14;
@@ -28,7 +28,9 @@ button {
   color: #39ff14;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🚀</text></svg>")
+      16 0,
+    auto; /*!emojicursor.app*/
   box-shadow: 0px 0px 10px #39ff14, 0px 0px 40px #39ff14;
 }
 
@@ -108,7 +110,7 @@ h2 {
   background-size: cover;
   background-position: center;
   margin: 0 auto;
-  background-image: url('images/chance10.png');
+  background-image: url("images/chance10.png");
 }
 
 #gameSection {
@@ -121,21 +123,55 @@ h2 {
 }
 
 @media (max-width: 700px) {
-  .keyboard {
-    width: 1px;
-    padding: 15px;
-    margin: 4px;
-  }
   body {
-    height: 101vh;
-    width: 101vw;
+    height: 105vh;
+    width: 100vw; /* Ensure the body takes full viewport width */
+    flex-direction: column; /* Stack elements vertically */
+    padding: 0 10px; /* Add some padding to prevent content from touching edges */
   }
+
+  #keyboard {
+    flex-direction: column; /* Stack keyboard rows vertically */
+    width: 100%; /* Full width of the parent container */
+  }
+
+  .row {
+    display: flex; /* Keep the row as flex to align buttons */
+    justify-content: center; /* Center the buttons in each row */
+    flex-wrap: wrap; /* Allow buttons to wrap to the next line if needed */
+    margin: 2px 0; /* Adjust margin for spacing */
+  }
+
+  .keyboard {
+    flex: 1; /* Allow buttons to grow equally */
+    padding: 5px; /* Smaller padding for compactness */
+    margin: 2px; /* Adjust margin for spacing */
+  }
+
+  button {
+    padding: 10px; /* Adjust button padding */
+    margin: 5px; /* Add margin for spacing between buttons */
+    width: 100px; /* Set a fixed width for the start game button */
+    height: 50px; /* Set a fixed height for the start game button */
+    font-size: 18px; /* Increase font size for readability */
+    cursor: pointer; /* Ensure it shows pointer on hover */
+  }
+
+  #player-input {
+    margin: 10px 0; /* Reduce margin around the player input */
+    justify-content: center; /* Center the input area */
+  }
+
   #scores-container {
-    justify-content: center;
+    justify-content: center; /* Center the scoreboard */
     align-items: center;
     text-align: center;
-    top: 75%;
-    bottom: 0;
-    right: 0;
+    top: 70%; /* Move scoreboard down */
+    padding: 10px; /* Add padding for spacing */
+  }
+
+  h1,
+  h2 {
+    font-size: 16px; /* Decrease font size for headings */
   }
 }
