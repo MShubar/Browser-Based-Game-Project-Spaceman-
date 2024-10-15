@@ -163,6 +163,7 @@ const player2NameLossesDisplay = document.querySelector("#player2nameLosses") //
 const triesLeft = document.querySelector("#Tries_left") // the number of tries that the user has
 const scoreContainer = document.querySelector("#scores-container") // the whole container that holds the scores and the username
 const clickSound = document.getElementById("click-sound")
+const storyLine = document.querySelector("#story-line")
 // ---------------------------------Functions-------------------------------------------//
 // Function to store usernames
 const storeUsernames = () => {
@@ -193,6 +194,7 @@ const displayUsernames = () => {
 const hideUsernameInputs = () => {
   usernameInputs.forEach((input) => (input.style.display = "none"))
   startGameBtn.style.display = "none"
+  storyLine.style.display = "none"
 }
 
 //  starts the game / init
