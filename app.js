@@ -6,164 +6,165 @@ let winCount1 = 0,
   winCount2 = 0 // Keeps track of wins for both players
 let lossCount1 = 0,
   lossCount2 = 0 // Keeps track of losses for both players
-let currentWord = "" // The word being guessed in the game
+let currentWord = '' // The word being guessed in the game
 let correctLetters = [] // Tracks correctly guessed letters in the word
 let clickCount = 0 // Counts wrong guesses
 let tries = 10 // Number of tries a player has per round
-let previousWord = "" // Tracks the last word used
-let keyenter = false
+let previousWord = '' // Tracks the last word used
+let keyEnter = false
+
 // -------------------------------------Constants----------------------------------------//
 // All the words in the game
 const words = [
-  "PIZZA",
-  "BURGER",
-  "PASTA",
-  "SUSHI",
-  "TACOS",
-  "SALAD",
-  "STEAK",
-  "FRIES",
-  "SOUP",
-  "SANDWICH",
-  "DUMPLINGS",
-  "CURRY",
-  "NOODLES",
-  "PANCAKES",
-  "WAFFLES",
-  "ICE CREAM",
-  "LASAGNA",
-  "BURRITO",
-  "PAELLA",
-  "SHAWARMA",
-  "CAR",
-  "BICYCLE",
-  "BUS",
-  "TRAIN",
-  "MOTORCYCLE",
-  "AIRPLANE",
-  "BOAT",
-  "SUBWAY",
-  "TRAM",
-  "HELICOPTER",
-  "SCOOTER",
-  "FERRY",
-  "TAXI",
-  "SKATEBOARD",
-  "VAN",
-  "TRUCK",
-  "HOVERCRAFT",
-  "HOT AIR BALLOON",
-  "SEGWAY",
-  "MONORAIL",
-  "T-SHIRT",
-  "JEANS",
-  "JACKET",
-  "SWEATER",
-  "SKIRT",
-  "DRESS",
-  "BLOUSE",
-  "SHORTS",
-  "SUIT",
-  "HOODIE",
-  "COAT",
-  "PAJAMAS",
-  "TANK TOP",
-  "SNEAKERS",
-  "SANDALS",
-  "SCARF",
-  "HAT",
-  "SOCKS",
-  "GLOVES",
-  "BELT",
+  'PIZZA',
+  'BURGER',
+  'PASTA',
+  'SUSHI',
+  'TACOS',
+  'SALAD',
+  'STEAK',
+  'FRIES',
+  'SOUP',
+  'SANDWICH',
+  'DUMPLINGS',
+  'CURRY',
+  'NOODLES',
+  'PANCAKES',
+  'WAFFLES',
+  'ICE CREAM',
+  'LASAGNA',
+  'BURRITO',
+  'PAELLA',
+  'SHAWARMA',
+  'CAR',
+  'BICYCLE',
+  'BUS',
+  'TRAIN',
+  'MOTORCYCLE',
+  'AIRPLANE',
+  'BOAT',
+  'SUBWAY',
+  'TRAM',
+  'HELICOPTER',
+  'SCOOTER',
+  'FERRY',
+  'TAXI',
+  'SKATEBOARD',
+  'VAN',
+  'TRUCK',
+  'HOVERCRAFT',
+  'HOT AIR BALLOON',
+  'SEGWAY',
+  'MONORAIL',
+  'T-SHIRT',
+  'JEANS',
+  'JACKET',
+  'SWEATER',
+  'SKIRT',
+  'DRESS',
+  'BLOUSE',
+  'SHORTS',
+  'SUIT',
+  'HOODIE',
+  'COAT',
+  'PAJAMAS',
+  'TANK TOP',
+  'SNEAKERS',
+  'SANDALS',
+  'SCARF',
+  'HAT',
+  'SOCKS',
+  'GLOVES',
+  'BELT'
 ]
 // These are categories selected by words
 const categories = {
   Food: [
-    "PIZZA",
-    "BURGER",
-    "PASTA",
-    "SUSHI",
-    "TACOS",
-    "SALAD",
-    "STEAK",
-    "FRIES",
-    "SOUP",
-    "SANDWICH",
-    "DUMPLINGS",
-    "CURRY",
-    "NOODLES",
-    "PANCAKES",
-    "WAFFLES",
-    "ICE CREAM",
-    "LASAGNA",
-    "BURRITO",
-    "PAELLA",
-    "SHAWARMA",
+    'PIZZA',
+    'BURGER',
+    'PASTA',
+    'SUSHI',
+    'TACOS',
+    'SALAD',
+    'STEAK',
+    'FRIES',
+    'SOUP',
+    'SANDWICH',
+    'DUMPLINGS',
+    'CURRY',
+    'NOODLES',
+    'PANCAKES',
+    'WAFFLES',
+    'ICE CREAM',
+    'LASAGNA',
+    'BURRITO',
+    'PAELLA',
+    'SHAWARMA'
   ],
   Transportation: [
-    "CAR",
-    "BICYCLE",
-    "BUS",
-    "TRAIN",
-    "MOTORCYCLE",
-    "AIRPLANE",
-    "BOAT",
-    "SUBWAY",
-    "TRAM",
-    "HELICOPTER",
-    "SCOOTER",
-    "FERRY",
-    "TAXI",
-    "SKATEBOARD",
-    "VAN",
-    "TRUCK",
-    "HOVERCRAFT",
-    "HOT AIR BALLOON",
-    "SEGWAY",
-    "MONORAIL",
+    'CAR',
+    'BICYCLE',
+    'BUS',
+    'TRAIN',
+    'MOTORCYCLE',
+    'AIRPLANE',
+    'BOAT',
+    'SUBWAY',
+    'TRAM',
+    'HELICOPTER',
+    'SCOOTER',
+    'FERRY',
+    'TAXI',
+    'SKATEBOARD',
+    'VAN',
+    'TRUCK',
+    'HOVERCRAFT',
+    'HOT AIR BALLOON',
+    'SEGWAY',
+    'MONORAIL'
   ],
   Clothing: [
-    "T-SHIRT",
-    "JEANS",
-    "JACKET",
-    "SWEATER",
-    "SKIRT",
-    "DRESS",
-    "BLOUSE",
-    "SHORTS",
-    "SUIT",
-    "HOODIE",
-    "COAT",
-    "PAJAMAS",
-    "TANK TOP",
-    "SNEAKERS",
-    "SANDALS",
-    "SCARF",
-    "HAT",
-    "SOCKS",
-    "GLOVES",
-    "BELT",
-  ],
+    'T-SHIRT',
+    'JEANS',
+    'JACKET',
+    'SWEATER',
+    'SKIRT',
+    'DRESS',
+    'BLOUSE',
+    'SHORTS',
+    'SUIT',
+    'HOODIE',
+    'COAT',
+    'PAJAMAS',
+    'TANK TOP',
+    'SNEAKERS',
+    'SANDALS',
+    'SCARF',
+    'HAT',
+    'SOCKS',
+    'GLOVES',
+    'BELT'
+  ]
 }
 
 // ---------------------------------Cached elements-------------------------------------//
-const startGameBtn = document.querySelector("#startgame") // Start game button
-const usernameInputs = document.querySelectorAll(".inputusername") // Input username 1 and 2
-const messageDisplay = document.querySelector("#messagedisplay") // Message displayed above for the user
-const keyboard = document.querySelectorAll(".keyboard") // key buttons show in the screen A-Z
-const winDisplay1 = document.querySelector("#wincount1") // score display the wins for player 1 the score container
-const winDisplay2 = document.querySelector("#wincount2") // score display the wins for player 2 the score container
-const lossDisplay1 = document.querySelector("#losscount1") // score display wins for player 1 the score container
-const lossDisplay2 = document.querySelector("#losscount2") // score display wins for player 2 the score container
-const wordDisplay = document.querySelector("#word-display") // the squares below currentWord
-const player1NameDisplay = document.querySelector("#player1name") // the player 1 name in the score container for win
-const player2NameDisplay = document.querySelector("#player2name") // the player 2 name in the score container for win
-const player1NameLossesDisplay = document.querySelector("#player1nameLosses") // the player 1 name in the score container for lose
-const player2NameLossesDisplay = document.querySelector("#player2nameLosses") // the player 2 name in the score container for lose
-const triesLeft = document.querySelector("#Tries_left") // the number of tries that the user has
-const scoreContainer = document.querySelector("#scores-container") // the whole container that holds the scores and the username
-const clickSound = document.getElementById("click-sound")
-const storyLine = document.querySelector("#story-line")
+const startGameBtn = document.querySelector('#startgame') // Start game button
+const usernameInputs = document.querySelectorAll('.inputusername') // Input username 1 and 2
+const messageDisplay = document.querySelector('#messagedisplay') // Message displayed above for the user
+const keyboard = document.querySelectorAll('.keyboard') // key buttons show in the screen A-Z
+const winDisplay1 = document.querySelector('#wincount1') // score display the wins for player 1 the score container
+const winDisplay2 = document.querySelector('#wincount2') // score display the wins for player 2 the score container
+const lossDisplay1 = document.querySelector('#losscount1') // score display wins for player 1 the score container
+const lossDisplay2 = document.querySelector('#losscount2') // score display wins for player 2 the score container
+const wordDisplay = document.querySelector('#word-display') // the squares below currentWord
+const player1NameDisplay = document.querySelector('#player1name') // the player 1 name in the score container for win
+const player2NameDisplay = document.querySelector('#player2name') // the player 2 name in the score container for win
+const player1NameLossesDisplay = document.querySelector('#player1nameLosses') // the player 1 name in the score container for lose
+const player2NameLossesDisplay = document.querySelector('#player2nameLosses') // the player 2 name in the score container for lose
+const triesLeft = document.querySelector('#Tries_left') // the number of tries that the user has
+const scoreContainer = document.querySelector('#scores-container') // the whole container that holds the scores and the username
+const clickSound = document.getElementById('#click-sound')
+const storyLine = document.querySelector('#story-line')
 // ---------------------------------Functions-------------------------------------------//
 // Function to store usernames
 const storeUsernames = () => {
@@ -175,7 +176,7 @@ const storeUsernames = () => {
     hideUsernameInputs()
     startGame()
   } else {
-    displayMessage("Please enter both usernames!")
+    displayMessage('Please enter both usernames!')
   }
 }
 
@@ -192,9 +193,9 @@ const displayUsernames = () => {
 
 // hides input fields / first page
 const hideUsernameInputs = () => {
-  usernameInputs.forEach((input) => (input.style.display = "none"))
-  startGameBtn.style.display = "none"
-  storyLine.style.display = "none"
+  usernameInputs.forEach((input) => (input.style.display = 'none'))
+  startGameBtn.style.display = 'none'
+  storyLine.style.display = 'none'
 }
 
 //  starts the game / init
@@ -204,8 +205,8 @@ const startGame = () => {
   previousWord = currentWord
   displayWord()
   displayTurnMessage()
-  document.getElementById("gameSection").style.display = "block"
-  scoreContainer.style.display = "flex"
+  document.getElementById('gameSection').style.display = 'block'
+  scoreContainer.style.display = 'flex'
 }
 
 // Resets game-related variables for a new turn
@@ -223,14 +224,14 @@ const selectRandomWord = () => {
   const wordsInCategory = categories[randomCategory]
   currentWord =
     wordsInCategory[Math.floor(Math.random() * wordsInCategory.length)]
-  correctLetters = Array(currentWord.length).fill("_")
+  correctLetters = Array(currentWord.length).fill('_')
 
   displayCategory(randomCategory)
 }
 
 // Displays the current category
 const displayCategory = (category) => {
-  const categoryDisplay = document.getElementById("category-display")
+  const categoryDisplay = document.getElementById('category-display')
   categoryDisplay.innerText = `Category: ${category}`
 }
 
@@ -238,7 +239,7 @@ const displayCategory = (category) => {
 const displayWord = () => {
   wordDisplay.innerHTML = correctLetters
     .map((letter) => `<div class="letter-square">${letter}</div>`)
-    .join("")
+    .join('')
 }
 
 // Displays whose turn it iss
@@ -255,6 +256,7 @@ const displayMessage = (message) => {
 
 // Handles the player's letter guess
 const handleGuess = (letter, button) => {
+  playClickSound()
   if (!clickedLetters.includes(letter)) {
     clickedLetters.push(letter)
     button.disabled = true
@@ -271,7 +273,7 @@ const handleGuess = (letter, button) => {
 
 // Updates the correctly guessed letters
 const updateCorrectLetters = (letter) => {
-  currentWord.split("").forEach((char, index) => {
+  currentWord.split('').forEach((char, index) => {
     if (char === letter) {
       correctLetters[index] = letter
     }
@@ -281,7 +283,7 @@ const updateCorrectLetters = (letter) => {
 
 // Checks if the player has won
 const checkForWin = () => {
-  if (!correctLetters.includes("_")) {
+  if (!correctLetters.includes('_')) {
     if (currentPlayer === 1) {
       winCount1++
       winDisplay1.innerText = winCount1
@@ -365,29 +367,30 @@ const triesCount = () => {
 
 // Updates the animation depending on the try
 const updateAnimation = () => {
-  const animationDiv = document.getElementById("animation")
+  const animationDiv = document.getElementById('animation')
   const imgPath = `images/chance${tries}.png`
   animationDiv.style.backgroundImage = `url(${imgPath})`
 }
 
 // After entering the player 1 and player 2. pressing Enter only will start the game instead of clicking the button
 const key = (event) => {
-  if (event.key === "Enter" && keyenter === false) {
+  if (event.key === 'Enter' && keyEnter === false) {
     storeUsernames()
-    keyenter = true
+    keyEnter = true
   } else {
   }
 }
 
 // Physical keyboard is turned into the letters and it looks for the button that has similar names/ID
 const handleKeyPress = (event) => {
-  if (event.key === "Enter" && keyenter === false) {
+  playClickSound()
+  if (event.key === 'Enter' && keyenter === false) {
     storeUsernames()
     keyenter = true
   } else {
     const letter = event.key.toUpperCase()
-    if (currentWord !== "") {
-      if (letter >= "A" && letter <= "Z") {
+    if (currentWord !== '') {
+      if (letter >= 'A' && letter <= 'Z') {
         const button = Array.from(keyboard).find((btn) => btn.id === letter)
         if (button && !button.disabled) {
           handleGuess(letter, button)
@@ -396,19 +399,19 @@ const handleKeyPress = (event) => {
     }
   }
 }
-function playClickSound() {
-  clickSound.currentTime = 0 // Rewind to the start
-  clickSound.play() // Play the sound
+const playClickSound = () => {
+  const audio = new Audio('./click-sound.wav')
+  audio.play()
 }
 // ---------------------------------Event Listeners-------------------------------------//
 // listener for the start game button
-startGameBtn.addEventListener("click", storeUsernames)
+startGameBtn.addEventListener('click', storeUsernames)
 
 // listener for the virtual keyboard
 keyboard.forEach((button) => {
-  button.addEventListener("click", () => handleGuess(button.id, button))
+  button.addEventListener('click', () => handleGuess(button.id, button))
 })
 
 // listeners for the physical keyboard for 2 different function
-document.addEventListener("keypress", key, playClickSound)
-document.addEventListener("keypress", handleKeyPress, playClickSound)
+document.addEventListener('keypress', key)
+document.addEventListener('keypress', handleKeyPress)
