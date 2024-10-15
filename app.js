@@ -162,6 +162,7 @@ const player1NameLossesDisplay = document.querySelector("#player1nameLosses") //
 const player2NameLossesDisplay = document.querySelector("#player2nameLosses") // the player 2 name in the score container for lose
 const triesLeft = document.querySelector("#Tries_left") // the number of tries that the user has
 const scoreContainer = document.querySelector("#scores-container") // the whole container that holds the scores and the username
+const clickSound = document.getElementById("click-sound")
 // ---------------------------------Functions-------------------------------------------//
 // Function to store usernames
 const storeUsernames = () => {
@@ -393,6 +394,10 @@ const handleKeyPress = (event) => {
     }
   }
 }
+function playClickSound() {
+  clickSound.currentTime = 0 // Rewind to the start
+  clickSound.play() // Play the sound
+}
 // ---------------------------------Event Listeners-------------------------------------//
 // listener for the start game button
 startGameBtn.addEventListener("click", storeUsernames)
@@ -403,5 +408,5 @@ keyboard.forEach((button) => {
 })
 
 // listeners for the physical keyboard for 2 different function
-document.addEventListener("keypress", key)
-document.addEventListener("keypress", handleKeyPress)
+document.addEventListener("keypress", key, playClickSound)
+document.addEventListener("keypress", handleKeyPress, playClickSound)

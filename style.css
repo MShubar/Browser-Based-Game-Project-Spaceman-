@@ -10,7 +10,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 101vh;
+  height: 100vh;
 }
 
 input {
@@ -36,6 +36,7 @@ button {
 
 button:disabled {
   background-color: #3d3d3d;
+  box-shadow: none;
 }
 
 #keyboard {
