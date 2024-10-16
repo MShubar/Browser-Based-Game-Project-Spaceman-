@@ -342,6 +342,7 @@ const switchTurn = () => {
   enableKeyboard()
   triesLeft.textContent = `Tries left: ${tries}`
   updateAnimation()
+  triesLeft.style.color = 'green'
 }
 
 // Disables all keyboard buttons
@@ -362,6 +363,13 @@ const enableKeyboard = () => {
 const triesCount = () => {
   tries -= 1
   triesLeft.textContent = `Tries left: ${tries}`
+  if (tries > 6) {
+    triesLeft.style.color = 'green'
+  } else if (tries === 6) {
+    triesLeft.style.color = 'yellow'
+  } else if (tries < 3) {
+    triesLeft.style.color = 'red'
+  }
   updateAnimation()
 }
 
