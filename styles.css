@@ -1,0 +1,65 @@
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to right, #dfe9f3, #ffffff);
+  margin: 0;
+  padding: 0;
+}
+
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+/* Profile Picture */
+.profile-picture {
+  max-width: 150px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 3px solid #3498db;
+}
+
+/* Typography */
+.title {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #7f8c8d;
+}
+
+/* Social Media Buttons */
+.social-media a {
+  margin: 5px;
+  text-decoration: none;
+}
+
+.social-media .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: #3498db;
+  border: 1px solid #3498db;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.social-media .button:hover {
+  background-color: #3498db;
+  color: #fff;
+}
